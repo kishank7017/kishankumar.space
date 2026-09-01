@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kishan Kumar — IT Engineer, ML &amp; RAG Systems</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #11141C;
+    --bg-panel: #171B26;
+    --bg-panel-2: #1D2230;
+    --line: #2A3040;
+    --text: #E7E8ED;
+    --text-dim: #99A0B2;
+    --text-faint: #626A7D;
+    --amber: #E3A24A;
+    --amber-dim: #B8813A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(17, 20, 28, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+  }
+  .nav-name {
+    font-family: 'Newsreader', serif;
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+  .nav-links a { text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    padding: 88px 0 72px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--amber);
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: 46px;
+    line-height: 1.12;
+    letter-spacing: -0.3px;
+    margin-bottom: 20px;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--amber);
+  }
+  .hero p.lede {
+    font-size: 17px;
+    color: var(--text-dim);
+    max-width: 46ch;
+    margin-bottom: 30px;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 14px;
+  }
+  .btn {
+    display: inline-block;
+    padding: 11px 20px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+  .btn-primary {
+    background: var(--amber);
+    color: #16130C;
+  }
+  .btn-primary:hover { background: #ecb267; }
+  .btn-ghost {
+    border: 1px solid var(--line);
+    color: var(--text);
+  }
+  .btn-ghost:hover { border-color: var(--text-dim); }
+
+  /* NODE GRAPH SVG */
+  .graph-viz { width: 100%; height: auto; }
+  .graph-viz circle { fill: var(--bg-panel-2); stroke: var(--amber-dim); stroke-width: 1.4; }
+  .graph-viz circle.lit { fill: var(--amber); stroke: var(--amber); }
+  .graph-viz line { stroke: var(--line); stroke-width: 1.2; }
+  .graph-viz line.active { stroke: var(--amber-dim); }
+
+  /* SECTIONS */
+  section { padding: 64px 0; border-top: 1px solid var(--line); }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 36px;
+  }
+  h2 {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: 26px;
+  }
+  .section-note {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--text-faint);
+  }
+
+  /* PROJECTS */
+  .project {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .project:last-child { border-bottom: none; }
+  .project-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text-faint);
+    padding-top: 3px;
+  }
+  .project h3 {
+    font-family: 'Newsreader', serif;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .project p {
+    color: var(--text-dim);
+    font-size: 14.5px;
+    max-width: 62ch;
+    margin-bottom: 10px;
+  }
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .stack span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: var(--amber);
+    border: 1px solid var(--amber-dim);
+    border-radius: 3px;
+    padding: 3px 8px;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .skill-group h4 {
+    font-size: 13px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--text-faint);
+    margin-bottom: 12px;
+    font-weight: 400;
+  }
+  .skill-group ul { list-style: none; }
+  .skill-group li {
+    font-size: 14.5px;
+    color: var(--text);
+    padding: 4px 0;
+  }
+
+  /* CONTACT */
+  .contact-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .contact-row a {
+    font-size: 14.5px;
+    text-decoration: none;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .contact-row a:hover { color: var(--amber); border-color: var(--amber-dim); }
+
+  footer {
+    padding: 32px 0 48px;
+    font-size: 12.5px;
+    color: var(--text-faint);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  @media (max-width: 700px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .graph-viz { max-width: 260px; margin: 0 auto; }
+    h1 { font-size: 34px; }
+    .project { grid-template-columns: 1fr; gap: 8px; }
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-name">Howard</div>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">final-year IT engineer / BIET, AKTU</div>
+      <h1>I build systems that <em>retrieve, reason,</em> and route data.</h1>
+      <p class="lede">Applied ML and LLM-pipeline engineer focused on RAG, LangGraph orchestration, and practical automation — from vector retrieval to production deployment.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View projects</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+    </div>
+    <svg class="graph-viz" viewBox="0 0 280 240" xmlns="http://www.w3.org/2000/svg">
+      <line x1="60" y1="50" x2="140" y2="30" />
+      <line x1="140" y1="30" x2="220" y2="60" class="active" />
+      <line x1="60" y1="50" x2="90" y2="120" />
+      <line x1="140" y1="30" x2="150" y2="110" class="active" />
+      <line x1="220" y1="60" x2="210" y2="130" />
+      <line x1="90" y1="120" x2="150" y2="110" class="active" />
+      <line x1="150" y1="110" x2="210" y2="130" />
+      <line x1="90" y1="120" x2="120" y2="190" />
+      <line x1="150" y1="110" x2="120" y2="190" class="active" />
+      <line x1="150" y1="110" x2="190" y2="195" />
+      <line x1="210" y1="130" x2="190" y2="195" />
+      <circle cx="60" cy="50" r="6" />
+      <circle cx="140" cy="30" r="7" class="lit" />
+      <circle cx="220" cy="60" r="6" />
+      <circle cx="90" cy="120" r="6" />
+      <circle cx="150" cy="110" r="8" class="lit" />
+      <circle cx="210" cy="130" r="6" />
+      <circle cx="120" cy="190" r="6" />
+      <circle cx="190" cy="195" r="6" class="lit" />
+    </svg>
+  </div>
+</header>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Selected work</h2>
+      <span class="section-note">03 projects</span>
+    </div>
+
+    <div class="project">
+      <div class="project-tag">RAG / LLM</div>
+      <div>
+        <h3>YouTube Transcript RAG Chatbot</h3>
+        <p>A retrieval-augmented chatbot that ingests YouTube video transcripts, embeds and stores them in a vector database, and answers questions grounded in the source video — built and iterated in Google Colab.</p>
+        <div class="stack">
+          <span>LangChain</span><span>Gemini</span><span>ChromaDB</span><span>Python</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-tag">Automation</div>
+      <div>
+        <h3>Hostel Seat Allocation System</h3>
+        <p>An allocation pipeline for a college hostel: scrapes student result data from the college portal with Selenium, then distributes seats proportionally across two hostels using the largest-remainder method, output as a color-coded Excel workbook.</p>
+        <div class="stack">
+          <span>Python</span><span>Selenium</span><span>Excel automation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-tag">ML / DL</div>
+      <div>
+        <h3>Tuned Neural Network Classifier</h3>
+        <p>A binary classifier built with Keras/TensorFlow, with hyperparameter search via keras-tuner — including debugging model portability across environments and correcting a scaler-serialization bug that was silently skewing predictions.</p>
+        <div class="stack">
+          <span>TensorFlow</span><span>Keras</span><span>keras-tuner</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Stack</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>LLM / RAG</h4>
+        <ul>
+          <li>LangChain</li>
+          <li>LangGraph</li>
+          <li>Vector retrieval</li>
+          <li>ChromaDB</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>ML / DL</h4>
+        <ul>
+          <li>TensorFlow / Keras</li>
+          <li>Hyperparameter tuning</li>
+          <li>Model evaluation</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Engineering</h4>
+        <ul>
+          <li>Python</li>
+          <li>Selenium</li>
+          <li>Docker (in progress)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Get in touch</h2>
+    </div>
+    <p style="color: var(--text-dim); max-width: 50ch;">Open to off-campus internship and full-time roles in applied ML / LLM engineering. Reach out directly, or find the code behind these projects below.</p>
+    <div class="contact-row">
+      <a href="mailto:kishank7017@gmail.com">kishank7017@gmail.com</a>
+      <a href="https://github.com/kishank7017" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/kishan-kumar-82798027a/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 Kishan Kumar — built and deployed from scratch</div>
+</footer>
+
+</body>
+</html>
