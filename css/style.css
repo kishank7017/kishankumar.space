@@ -236,6 +236,17 @@ h2 {
   will-change: transform;
 }
 .tilt-card:hover { border-color: rgba(139,108,255,0.4); }
+.card-link { display: block; text-decoration: none; color: inherit; cursor: pointer; }
+.card-cta {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--cyan);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.25s, transform 0.25s;
+}
+.card-link:hover .card-cta { opacity: 1; transform: translateX(0); }
 .card-glow {
   position: absolute;
   inset: -1px;
